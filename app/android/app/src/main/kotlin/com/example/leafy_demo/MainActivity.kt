@@ -1,4 +1,4 @@
-package com.example.leafy_demo
+package com.andreschoultz.leafy
 
 import io.flutter.embedding.android.FlutterActivity
 

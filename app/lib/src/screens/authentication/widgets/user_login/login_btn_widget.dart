@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../state/global_state.dart';
 import '../../../../state/user_state.dart';
-import '../../../plants/plant_details_view.dart';
+import '../../../plants/plant_list_view.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
@@ -22,7 +22,7 @@ class LoginButton extends StatelessWidget {
       final loginResult = await Provider.of<UserModel>(context, listen: false).login(emailController.text, passwordController.text);
 
       if (loginResult.error() == false && context.mounted) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PlantMoreDetailsView()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PlantListView()));
       }
     }
   }

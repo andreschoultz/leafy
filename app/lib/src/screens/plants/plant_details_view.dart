@@ -9,7 +9,7 @@ class PlantMoreDetailsView extends StatelessWidget {
     super.key,
   });
 
-  static const routeName = '/';
+  static const routeName = '/plant/details';
 
   static const List<String> chipNames = [
     'Indoor',

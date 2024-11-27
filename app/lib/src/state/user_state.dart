@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leafy_demo/src/services/storage/user.dart';
 
 import '../models/state/user_state_model.dart';
 import '../services/api/api_authentication_service.dart';
@@ -66,5 +67,17 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
 
     return registerResult;
+  }
+
+  Future<void> logout() async {
+    globalModel.setLoading();
+
+    await UserStorage().purge();
+
+    globalModel.setLoading(value: false);
+    globalModel.setError(false);
+    globalModel.clearMessage();
+
+    notifyListeners();
   }
 }

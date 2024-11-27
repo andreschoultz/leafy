@@ -8,11 +8,12 @@ import '../storage/user.dart';
 import 'models/responses/authentication_responses.dart';
 
 class APIService {
-  final String _BASE_URL = '<your_url_here>'; // TODO: Pull from env
+  final String _BASE_URL = 'https://leafy-dev-api.azurewebsites.net'; // TODO: Pull from env
+  final _TIMEOUT = const Duration(seconds: 20);
 
   Future<http.Response> get(String uri, List<String> params, {bool enableRetryOnFail = true, bool enableRetryAuthRefresh = true}) async {
     final headers = await _getRequestHeaders();
-    Response response = await http.get(Uri.parse('$_BASE_URL$uri/${params.join('/')}'), headers: headers);
+    Response response = await http.get(Uri.parse('$_BASE_URL$uri/${params.join('/')}'), headers: headers).timeout(_TIMEOUT);
 
     /* Auth failed, try to refresh tokens */
     if (enableRetryAuthRefresh && response.statusCode == HttpStatusCode.unauthorized.code) {
@@ -30,7 +31,7 @@ class APIService {
 
   Future<http.Response> post(String uri, Map<String, dynamic> request, {bool enableRetryOnFail = true, bool enableRetryAuthRefresh = true}) async {
     final headers = await _getRequestHeaders();
-    Response response = await http.post(Uri.parse('$_BASE_URL$uri'), headers: headers, body: jsonEncode(request));
+    Response response = await http.post(Uri.parse('$_BASE_URL$uri'), headers: headers, body: jsonEncode(request)).timeout(_TIMEOUT);
 
     /* Auth failed, try to refresh tokens */
     if (enableRetryAuthRefresh && response.statusCode == HttpStatusCode.unauthorized.code) {
@@ -54,7 +55,7 @@ class APIService {
       return http.Response('Unauthorized', HttpStatusCode.unauthorized.code);      
     }
 
-    final response = await get('/authenticate/refresh', [refreshToken, accessToken], enableRetryAuthRefresh: false);
+    final response = await get('/authenticate/refresh-access-token', [refreshToken, accessToken], enableRetryAuthRefresh: false);
 
     if (response.statusCode != HttpStatusCode.ok.code) {
       await UserStorage().purge();
