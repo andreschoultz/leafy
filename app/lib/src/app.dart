@@ -7,11 +7,13 @@ import 'package:leafy_demo/src/state/user_state.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/authentication/user_login_view.dart';
+import 'screens/plants/plant_list_view.dart';
 import 'screens/users/user_register_view.dart';
 import 'services/storage/user.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'state/global_state.dart';
+import 'state/plant_state.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
 
         // Determine the initial route based on authentication status
         final initialRoute = snapshot.data == true
-            ? PlantMoreDetailsView.routeName // Main app screen
+            ? PlantListView.routeName // Main app screen
             : UserLoginView.routeName; // Authentication screen
 
         return MultiProvider(
@@ -46,6 +48,10 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProxyProvider<GlobalModel, UserModel>(
               create: (context) => UserModel(info: UserStateModel.empty(), globalModel: Provider.of<GlobalModel>(context, listen: false)),
               update: (context, globalModel, userModel) => userModel!..setGlobalModel(globalModel),
+            ),
+            ChangeNotifierProxyProvider<GlobalModel, PlantModel>(
+              create: (context) => PlantModel(globalModel: Provider.of<GlobalModel>(context, listen: false)),
+              update: (context, globalModel, plantModel) => plantModel!..setGlobalModel(globalModel),
             ),
             ChangeNotifierProvider(
               create: (_) => settingsController,
@@ -109,6 +115,8 @@ class MyApp extends StatelessWidget {
                           return UserLoginView();
                         case UserRegisterView.routeName:
                           return UserRegisterView();
+                        case PlantListView.routeName:
+                          return PlantListView();
                         default:
                           return UserLoginView();
                       }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../models/forms/user_register_model.dart';
 import '../../../../state/global_state.dart';
 import '../../../../state/user_state.dart';
-import '../../../plants/plant_details_view.dart';
+import '../../../plants/plant_list_view.dart';
 
 class RegisterButton extends StatelessWidget {
   const RegisterButton({
@@ -20,7 +20,7 @@ class RegisterButton extends StatelessWidget {
           formData.emailController.text, formData.firstNameController.text, formData.surnameController.text, formData.passwordController.text);
 
       if (registerResult.error() == false && context.mounted) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PlantMoreDetailsView()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PlantListView()));
       }
     }
   }
