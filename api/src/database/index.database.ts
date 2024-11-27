@@ -12,6 +12,6 @@ export const pool = createPool({
     maxIdle: 20,
     idleTimeout: 60000,
     queueLimit: 2,
-    enableKeepAlive: true,
+    enableKeepAlive: false,
     keepAliveInitialDelay: 0,
 });

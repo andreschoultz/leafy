@@ -1,3 +1,7 @@
 {
-    "cmake.sourceDirectory": "C:/Users/andre/source/repos/leafy/app/windows"
+    "cmake.sourceDirectory": "C:/Users/andre/source/repos/leafy/app/windows",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }
