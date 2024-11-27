@@ -26,7 +26,6 @@ router.get('/login/:email/:password', async (req: Request, res: Response) => {
             });
         }
     } catch (error) {
-        console.log()
         res.status(500).json({
             message: 'Oops, something went wrong. Please try again.',
             error
