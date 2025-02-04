@@ -36,7 +36,7 @@ class LoginButton extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: SizedBox.expand(
             child: FilledButton(
-              onPressed: () => _onLogin(context),
+              onPressed: () => globalModel.isLoading ? null : _onLogin(context),
               style: ButtonStyle(padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(14))),
               child: globalModel.isLoading
                   ? const CircularProgressIndicator(

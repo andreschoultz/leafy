@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:leafy_demo/src/models/state/user_state_model.dart';
 import 'package:leafy_demo/src/screens/plants/plant_details_view.dart';
+import 'package:leafy_demo/src/state/filter_state.dart';
 import 'package:leafy_demo/src/state/user_state.dart';
 import 'package:provider/provider.dart';
 
@@ -45,13 +46,16 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<GlobalModel>(
               create: (context) => GlobalModel(),
             ),
+            ChangeNotifierProvider<FilterModel>(
+              create: (context) => FilterModel(),
+            ),
             ChangeNotifierProxyProvider<GlobalModel, UserModel>(
               create: (context) => UserModel(info: UserStateModel.empty(), globalModel: Provider.of<GlobalModel>(context, listen: false)),
               update: (context, globalModel, userModel) => userModel!..setGlobalModel(globalModel),
             ),
-            ChangeNotifierProxyProvider<GlobalModel, PlantModel>(
-              create: (context) => PlantModel(globalModel: Provider.of<GlobalModel>(context, listen: false)),
-              update: (context, globalModel, plantModel) => plantModel!..setGlobalModel(globalModel),
+            ChangeNotifierProxyProvider2<GlobalModel, FilterModel, PlantModel>(
+              create: (context) => PlantModel(globalModel: Provider.of<GlobalModel>(context, listen: false), filterModel: Provider.of<FilterModel>(context, listen: false)),
+              update: (context, globalModel, filterModel, plantModel) => plantModel!..setModels(globalModel, filterModel),
             ),
             ChangeNotifierProvider(
               create: (_) => settingsController,

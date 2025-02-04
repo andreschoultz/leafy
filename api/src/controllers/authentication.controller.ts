@@ -82,7 +82,7 @@ router.get('/refresh-access-token/:refreshToken/:accessToken', async (req: Reque
         }
 
         res.status(200).json({
-            token: newAccessToken
+            accessToken: newAccessToken
         });
     } catch (error) {
         res.status(500).json({

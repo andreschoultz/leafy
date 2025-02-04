@@ -8,7 +8,7 @@ import '../storage/user.dart';
 import 'models/responses/authentication_responses.dart';
 
 class APIService {
-  final String _BASE_URL = 'https://leafy-dev-api.azurewebsites.net'; // TODO: Pull from env
+  final String _BASE_URL = 'https://9fd4-2c0e-7f01-e013-5d00-d90a-3045-e6a9-e5f7.ngrok-free.app'; // TODO: Pull from env
   final _TIMEOUT = const Duration(seconds: 20);
 
   Future<http.Response> get(String uri, List<String> params, {bool enableRetryOnFail = true, bool enableRetryAuthRefresh = true}) async {
