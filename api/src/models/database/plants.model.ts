@@ -7,6 +7,7 @@ interface Plant extends RowDataPacket {
     Deleted?: boolean;
     Name: string;
     Description?: string;
+    ImageURL: string;
     PlantInfoId?: string | null;
     WeeklyWater?: number | null;
     Infos?: PlantInfo;
@@ -33,4 +34,22 @@ interface PlantTag extends RowDataPacket {
     PlantId: string;
 }
 
-export type { Plant, PlantInfo, PlantTag };
+interface PlantInfoGET extends RowDataPacket {
+    Id: string;
+    Name: string;
+    Description: string;
+    ImageURL: string;
+    IdealHumidityPerc: number;
+    AvgHeight: number;
+    AvgDiameter: number;
+    IdealSunlightK: number;
+    WeeklyWater: number;
+    UserPlantId?: string;
+}
+
+interface PlantTagGet extends RowDataPacket {
+    TagId: string;
+    Name: string;
+}
+
+export type { Plant, PlantInfo, PlantTag, PlantInfoGET, PlantTagGet };

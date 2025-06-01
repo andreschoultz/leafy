@@ -34,7 +34,7 @@ class RegisterButton extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: SizedBox.expand(
             child: FilledButton(
-              onPressed: () => _onRegister(context),
+              onPressed: () => globalModel.isLoading ? null : _onRegister(context),
               style: ButtonStyle(padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(14))),
               child: globalModel.isLoading
                   ? const CircularProgressIndicator(

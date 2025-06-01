@@ -59,6 +59,7 @@ async function refreshAccessToken(accessToken: string, refreshToken: string): Pr
     return new Promise((resolve, reject) => {
         verify(refreshToken, ENV_VAR.JWT.TOKEN, function (err, decoded) {
             if (err) {
+                console.log(err);
                 reject('Invalid token');
             }
 
@@ -71,7 +72,7 @@ async function refreshAccessToken(accessToken: string, refreshToken: string): Pr
 
 function generateAccessToken(userId: string, email: string): string {
     const jwtOptions: SignOptions = {
-        expiresIn: '30m',
+        expiresIn: '30d', // TODO: Change back to 30m
     };
 
     return sign({ userId, email }, ENV_VAR.JWT.TOKEN, jwtOptions);
@@ -79,7 +80,7 @@ function generateAccessToken(userId: string, email: string): string {
 
 function generateRefreshToken(userId: string, email: string): string {
     const jwtOptions: SignOptions = {
-        expiresIn: '1d',
+        expiresIn: '1w', // TODO: Change back to 1-5 days
     };
 
     return sign({ userId, email }, ENV_VAR.JWT.TOKEN, jwtOptions);

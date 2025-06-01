@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class StringStorage {
   StringStorage({required this.key});
 
-  static String? _value;
+  String? _value;
   final String key;
 
   Future<String?> get() async {
@@ -30,7 +30,7 @@ class StringStorage {
 class DoubleStorage {
   DoubleStorage({required this.key});
 
-  static double? _value;
+  double? _value;
   final String key;
 
   Future<double?> get() async {
@@ -57,7 +57,7 @@ class DoubleStorage {
 class IntStorage {
   IntStorage({required this.key});
 
-  static int? _value;
+  int? _value;
   final String key;
 
   Future<int?> get() async {
@@ -84,7 +84,7 @@ class IntStorage {
 class BoolStorage {
   BoolStorage({required this.key});
 
-  static bool? _value;
+  bool? _value;
   final String key;
 
   Future<bool?> get() async {
